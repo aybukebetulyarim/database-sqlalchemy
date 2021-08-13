@@ -1,11 +1,8 @@
-import datetime
-from sqlalchemy import *
-from sqlalchemy import create_engine
-
-from sqlalchemy.orm import sessionmaker
-from sqlalchemy.orm import relationship,backref
+import sqlalchemy
+from sqlalchemy import Column,Integer,String
+from sqlalchemy.orm import relationship
 from base import Base
-from log_info import *
+import datetime
 
 
 class Library(Base):
@@ -18,7 +15,7 @@ class Library(Base):
     category      = Column(String)
     translator    = Column(String)
     date_time     = Column(String)
-    log_id        = relationship('Log_info', lazy=True)
+    log_id        = relationship("Log_info",back_populates="lib")
 
     def __init__(self,book_name:str,edition_year:int,author:str,owner_name:str,category:str,translator:str):
         self.book_name    = book_name
